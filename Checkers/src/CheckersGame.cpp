@@ -1,5 +1,7 @@
 #include "Game.h"
-
+#include "Board.h"
+#include "Dimple.h"
+#include "Ball.h"
 using namespace Brickware;
 using namespace Core;
 using namespace Graphics;
@@ -9,8 +11,13 @@ using namespace Utility;
 class CheckersGame : public Game
 {
 public:
+	Board* board;
+	Material* mat;
+	Shader* ballShader;
 	CheckersGame::CheckersGame() : Game(800, 600)
-	{
+	{	
+		ballShader = new Shader("VertexShader.hlsl", "PixelShader.hlsl");
+		//board->addBall(new Ball()
 	}
 
 	bool CheckersGame::init()
