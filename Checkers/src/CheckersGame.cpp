@@ -14,10 +14,20 @@ public:
 	Board* board;
 	Material* mat;
 	Shader* ballShader;
+	Camera* camera;
+	GameObject* cameraObject;
 	CheckersGame::CheckersGame() : Game(800, 600)
 	{	
 		ballShader = new Shader("VertexShader.hlsl", "PixelShader.hlsl");
 		//board->addBall(new Ball()
+		camera = new Camera(50, 0.1f, 0.1f, 0.1f, 100.0f);
+		camera->setActive();
+		cameraObject = new GameObject();
+		cameraObject->addComponent(camera);
+
+		for (unsigned int i = 0; i < gameObjects.size(); i++)
+			gameObjects[i]->Start();
+
 	}
 
 	bool CheckersGame::init()
