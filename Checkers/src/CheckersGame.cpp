@@ -13,15 +13,6 @@ class CheckersGame : public Game
 public:
 	Board* board;
 
-	Material* boardMat;
-	Shader* ballShader;
-	Camera* camera;
-	GameObject* cameraObject;
-
-	GameObject* boardObject;
-	Mesh* boardMesh;
-	MeshRenderer* boardRenderer;
-	Texture* testTexture;
 	CheckersGame::CheckersGame() : Game(800, 600)
 	{	
 		
@@ -37,28 +28,45 @@ public:
 		if (!good)
 			return false;
 
-		ballShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
-		testTexture = new Texture("Textures/boardTextureTest.bmp");
+		Shader* ballShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
+		Texture* testTexture = new Texture("Textures/lavaTexture.bmp");
+		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
 		//board->addBall(new Ball()
-		camera = new Camera(50, 0.1f, 0.1f, 0.1f, 100.0f);
-		camera->setLookAt(Vector3(0.0f, 0.0f, 0.0f));
+		Camera* camera = new Camera(50, 0.1f, 0.1f, 0.1f, 100.0f);
+		camera->setLookAt(Vector3(0.0f, 0.0f, -5.0f));
 		camera->setActive();
-		cameraObject = new GameObject();
+
+		GameObject* cameraObject = new GameObject();
 		cameraObject->addComponent(camera);
 
+		Material* boardMat = new Material(ballShader);
+		boardMat->setTexture("diffuseTexture", d20Texture);
 
-		boardMat = new Material(ballShader);
+		Mesh* boardMesh = new Mesh("Models/d20Dimpled.obj");
+		MeshRenderer* boardRenderer = new MeshRenderer(boardMesh, boardMat);
 
-		boardMesh = new Mesh("Models/d20Dimpled.obj");
-		boardMat->setTexture("diffuseTexture", testTexture);
-		boardRenderer = new MeshRenderer(boardMesh, boardMat);
-		boardObject = new GameObject();
+		GameObject* boardObject = new GameObject();
 		boardObject->addComponent(boardRenderer);
-		cameraObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 5.0f));
-		boardObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 0.0f));
 
 
+		cameraObject->getTransform()->setPosition(Vector3(0.0f, 0.0f,0.0f));
+		boardObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, -5.0f));
 
+		
+		//+-=-=-=-=-=-=-=+ Lights! +-=-=-=-=-=-=-=-=+
+		GameObject* lightObject2 = new GameObject();
+		PointLight* light2 = new PointLight();
+		light2->setDiffuseColor(Vector3(1.0f, 1.0f, 1.0f));
+		light2->setSpecularColor(Vector3(.3f, .3f, .3f));
+		lightObject2->getTransform()->setPosition(Vector3(0.0f, 10.0f, 0.0f));
+		lightObject2->addComponent(light2);
+
+		GameObject* lightObject1 = new GameObject();
+		PointLight* light1 = new PointLight();
+		light1->setDiffuseColor(Vector3(1.0f, 1.0f, 1.0f));
+		light1->setSpecularColor(Vector3(.3f, .3f, .3f));
+		lightObject1->getTransform()->setPosition(Vector3(0.0f, -10.0f, 0.0f));
+		lightObject1->addComponent(light1);
 
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
 			gameObjects[i]->Start();
