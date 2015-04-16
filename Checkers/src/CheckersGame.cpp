@@ -4,6 +4,8 @@
 #include "Dimple.h"
 #include "Ball.h"
 #include "BoardControl.h"
+#include "CameraControl.h"
+
 using namespace Brickware;
 using namespace Core;
 using namespace Graphics;
@@ -35,11 +37,15 @@ public:
 		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
 		//board->addBall(new Ball()
 		Camera* camera = new Camera(90, 0.1f, 0.1f, 0.1f, 100.0f);
-		camera->setLookAt(Vector3(0.0f, 0.0f, -5.0f));
+		camera->setLookAt(Vector3(0.0f, 0.0f, -3.0f));
 		camera->setActive();
+
+		CameraControl* cameraControl = new CameraControl();
+		cameraControl->setLookAtTarget(Vector3(0.0f, 0.0f, -3.0f));
 
 		GameObject* cameraObject = new GameObject();
 		cameraObject->addComponent(camera);
+		//cameraObject->addComponent(cameraControl);
 
 		Material* boardMat = new Material(ballShader);
 		boardMat->setTexture("diffuseTexture", d20Texture);
