@@ -1,7 +1,9 @@
-#include "Game.h"
+#include "BrickwareCore\Game.hpp"
+
 #include "Board.h"
 #include "Dimple.h"
 #include "Ball.h"
+#include "BoardControl.h"
 using namespace Brickware;
 using namespace Core;
 using namespace Graphics;
@@ -32,7 +34,7 @@ public:
 		Texture* testTexture = new Texture("Textures/lavaTexture.bmp");
 		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
 		//board->addBall(new Ball()
-		Camera* camera = new Camera(50, 0.1f, 0.1f, 0.1f, 100.0f);
+		Camera* camera = new Camera(90, 0.1f, 0.1f, 0.1f, 100.0f);
 		camera->setLookAt(Vector3(0.0f, 0.0f, -5.0f));
 		camera->setActive();
 
@@ -47,25 +49,25 @@ public:
 
 		GameObject* boardObject = new GameObject();
 		boardObject->addComponent(boardRenderer);
-
+		boardObject->addComponent(new BoardControl());
 
 		cameraObject->getTransform()->setPosition(Vector3(0.0f, 0.0f,0.0f));
-		boardObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, -5.0f));
+		boardObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, -3.0f));
 
 		
 		//+-=-=-=-=-=-=-=+ Lights! +-=-=-=-=-=-=-=-=+
 		GameObject* lightObject2 = new GameObject();
 		PointLight* light2 = new PointLight();
-		light2->setDiffuseColor(Vector3(1.0f, 1.0f, 1.0f));
+		light2->setDiffuseColor(Vector3(.8f, .8f, .8f));
 		light2->setSpecularColor(Vector3(.3f, .3f, .3f));
 		lightObject2->getTransform()->setPosition(Vector3(0.0f, 10.0f, 0.0f));
 		lightObject2->addComponent(light2);
 
 		GameObject* lightObject1 = new GameObject();
 		PointLight* light1 = new PointLight();
-		light1->setDiffuseColor(Vector3(1.0f, 1.0f, 1.0f));
+		light1->setDiffuseColor(Vector3(.5f, .5f, .5f));
 		light1->setSpecularColor(Vector3(.3f, .3f, .3f));
-		lightObject1->getTransform()->setPosition(Vector3(0.0f, -10.0f, 0.0f));
+		lightObject1->getTransform()->setPosition(Vector3(0.0f, -20.0f, 0.0f));
 		lightObject1->addComponent(light1);
 
 		for (unsigned int i = 0; i < gameObjects.size(); i++)

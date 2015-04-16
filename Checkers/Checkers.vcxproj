@@ -71,12 +71,14 @@
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
     <ClInclude Include="include\Board.h" />
+    <ClInclude Include="include\BoardControl.h" />
     <ClInclude Include="include\Dimple.h" />
     <ClInclude Include="include\Util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\BoardControl.cpp" />
     <ClCompile Include="src\CheckersGame.cpp" />
     <ClCompile Include="src\Dimple.cpp" />
   </ItemGroup>

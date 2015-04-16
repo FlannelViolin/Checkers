@@ -1,7 +1,8 @@
 #ifndef BALL_H
 #define BALL_H
-#include "Component.h"
-#include "Transform.h"
+#include "BrickwareCore\Component.hpp"
+#include "BrickwareCore\Transform.hpp"
+
 #include "Dimple.h"
 #include "Util.h"
 #include "Board.h"

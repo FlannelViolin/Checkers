@@ -1,7 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
-#include "Component.h"
-#include "Transform.h"
+#include "BrickwareCore\Component.hpp"
+#include "BrickwareCore\Transform.hpp"
+
 #include "Dimple.h"
 #include "Ball.h"
 #include <list>

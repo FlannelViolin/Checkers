@@ -1,7 +1,9 @@
 #ifndef DIMPLE_H
 #define DIMPLE_H
-#include "Component.h"
-#include "Transform.h"
+
+#include "BrickwareCore\Component.hpp"
+#include "BrickwareCore\Transform.hpp"
+
 #include "Ball.h"
 #include "Util.h"
 #include "Board.h"
