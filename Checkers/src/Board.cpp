@@ -17,3 +17,12 @@ void Board::addBall(Ball* b){
 void Board::addDimple(Dimple* d){
 	dimples.push_back(d);
 }
+
+void Board::populateBoard(char* json){
+	Utility::JSONParser* parser = new Utility::JSONParser();
+
+
+	Utility::JSONObject* boardInfo = parser->DecodeJSONFromFile(json);
+
+	
+}

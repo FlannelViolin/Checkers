@@ -13,7 +13,7 @@ using namespace Graphics;
 
 class Board;
 class Dimple;
-class Ball
+class Ball : public Component
 {
 
 private:

@@ -2,7 +2,7 @@
 #define BOARD_H
 #include "BrickwareCore\Component.hpp"
 #include "BrickwareCore\Transform.hpp"
-
+#include "BrickwareUtils\JSONParser.hpp"
 #include "Dimple.h"
 #include "Ball.h"
 #include <list>
@@ -12,9 +12,10 @@ using namespace Core;
 using namespace Math;
 using namespace Graphics;
 
+
 class Ball;
 class Dimple;
-class Board
+class Board : public Component
 {
 
 private:
@@ -32,7 +33,7 @@ public:
 	void setSelected(Ball b);
 	void getSelected(Ball b);
 
-
+	void populateBoard(char* jsonFile);
 
 
 };

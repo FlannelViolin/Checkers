@@ -14,7 +14,7 @@ using namespace Math;
 using namespace Graphics;
 
 struct Neighbor; 
-class Dimple
+class Dimple : public Component
 {
 
 private:

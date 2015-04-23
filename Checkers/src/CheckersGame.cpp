@@ -76,8 +76,18 @@ public:
 		lightObject1->getTransform()->setPosition(Vector3(0.0f, -20.0f, 0.0f));
 		lightObject1->addComponent(light1);
 
+
+		//+ game object testing //
+		
+		board = new Board();
+		board->populateBoard("Coords/Dimples.js");
+		boardObject->addComponent(board);
+
+
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
 			gameObjects[i]->Start();
+
+
 
 
 		return true;
