@@ -20,8 +20,9 @@ class Board : public Component
 
 private:
 	std::list<Ball*> balls;
-	std::list<Dimple*> dimples;
+	std::vector<Dimple*> dimples;
 	Ball* selectedBall;
+	Color getColorFromString(char* string);
 public:
 	Board();
 	~Board();
@@ -32,6 +33,9 @@ public:
 	// get/selected selected 
 	void setSelected(Ball b);
 	void getSelected(Ball b);
+
+
+	Dimple* getDimpleAtIndex(int index);
 
 	void populateBoard(char* jsonFile);
 

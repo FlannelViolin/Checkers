@@ -17,4 +17,19 @@ enum Direction{
 	DOWN_LEFT = 5
 };
 
+enum Color{
+	LIME,
+	GREEN,
+	BLACK,
+	WHITE,
+	VIOLET,
+	PURPLE,
+	YELLOW,
+	CYAN,
+	RED,
+	BLUE,
+
+};
+
+
 #endif UTIL_H

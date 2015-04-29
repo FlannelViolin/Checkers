@@ -19,25 +19,28 @@ class Dimple : public Component
 
 private:
 	Board* board;
-	Material* color;
+	Color color;
 	std::list<Neighbor*> neighbors;
-	Transform* position;
+	Vector3* position;
 	bool occupied;
-
+	int index;
 
 	Direction acrossFromDirection(Direction d);
+	//Color getColorFromString(char* string);
 
 public:
 	Dimple();
 	~Dimple();
-	Dimple(Material* c, Transform* pos, Board* b);
+	Dimple(Color c, Vector3* pos, Board* b, int i);
 
 	Dimple* getNeighborAtDirection(Direction d);
 
 	bool toggleOccupied();
 	bool isOccupied();
 
-	Transform* getPos();
+	int getIndex();
+
+	Vector3* getPos();
 
 	void addNeighboringDimple(Neighbor* n);
 	void addNeighboringDimple(Dimple* d, Direction dir);

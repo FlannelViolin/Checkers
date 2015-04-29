@@ -10,11 +10,12 @@ Dimple::~Dimple()
 {
 }
 
-Dimple::Dimple(Material* c, Transform* pos, Board* b){
+Dimple::Dimple(Color c, Vector3* pos, Board* b, int i){
 	color = c;
 	position = pos;
 	board = b;
 	board->addDimple(this);
+	i = index;
 }
 
 // get neighbor of a dimple at a certain direction
@@ -36,8 +37,12 @@ bool Dimple::toggleOccupied() {
 	return occupied;
 }
 
-Transform* Dimple::getPos(){
+Vector3* Dimple::getPos(){
 	return position;
+}
+
+int Dimple::getIndex(){
+	return index;
 }
 
 // TODO put in  a check to see if there is already a neighbor there
@@ -77,3 +82,4 @@ Direction Dimple::acrossFromDirection(Direction d){
 	}
 	return Direction(d + 3);
 }
+

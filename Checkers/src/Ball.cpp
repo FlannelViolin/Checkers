@@ -15,7 +15,7 @@ Ball::Ball(Material* c, Dimple* startDimple, Board* b){
 	// add ball to board
 	board->addBall(this);
 	// this shouuld be offset by the dimple object's normal
-	position = currentDimple->getPos();
+//	position = currentDimple->getPos();
 	state = NONE;
 }
 
@@ -63,7 +63,7 @@ bool Ball::moveBall(Direction d){
 	currentDimple->toggleOccupied();
 
 	//#TODO update transform;
-	position = currentDimple->getPos();
+	//position = currentDimple->getPos();
 
 	
 
