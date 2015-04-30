@@ -33,7 +33,7 @@ public:
 			return false;
 
 		Shader* ballShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
-		Texture* testTexture = new Texture("Textures/lavaTexture.bmp");
+		Texture* lavaTexture = new Texture("Textures/lavaTexture.bmp");
 		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
 		//board->addBall(new Ball()
 		Camera* camera = new Camera(90, 0.1f, 0.1f, 0.1f, 100.0f);
@@ -54,7 +54,7 @@ public:
 
 		GameObject* boardObject = new GameObject();
 		boardObject->addComponent(boardRenderer);
-		//boardObject->addComponent(new BoardControl());
+		
 
 		cameraObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 3.0f));
 		boardObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 0.0f));
@@ -77,13 +77,26 @@ public:
 
 
 		//+ game object testing //
+
+		Mesh* ballMesh = new Mesh("Models/BallSmall.obj");
+		Material* ballMat = new Material(ballShader);
+		ballMat->setTexture("diffuseTexture", lavaTexture);
+		//GameObject* ballObject = new GameObject();
+		//ballObject->addComponent(ballRenderer);
+		//ballObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 0.0f));
 		
 		board = new Board();
-		board->populateBoard("Coords/Dimples.js");
+		board->populateBoard("Coords/Dimples.js",2);
 		board->populateNeighbors();
 		boardObject->addComponent(board);
 
-
+		for (Ball* b : board->getBalls()){
+			GameObject* ballObject = new GameObject();
+			MeshRenderer* ballRenderer = new MeshRenderer(ballMesh, ballMat);
+			ballObject->addComponent(b);
+			ballObject->addComponent(ballRenderer);
+			ballObject->getTransform()->setPosition(*b->getPosition());
+		}
 
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
 			gameObjects[i]->Start();

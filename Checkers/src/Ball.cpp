@@ -7,7 +7,8 @@ Ball::Ball()
 
 }
 
-Ball::Ball(Material* c, Dimple* startDimple, Board* b){
+Ball::Ball(Color c, Dimple* startDimple, Board* b, Vector3* pos){
+	position = pos;
 	color = c;
 	currentDimple = startDimple;
 	board = b;
@@ -68,4 +69,8 @@ bool Ball::moveBall(Direction d){
 	
 
 	return true;
+}
+
+Vector3* Ball::getPosition(){
+	return position;
 }

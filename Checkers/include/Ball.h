@@ -17,10 +17,10 @@ class Ball : public Component
 {
 
 private:
-	Material* color;
+	Color color;
 	Dimple* currentDimple;
 	SelectionState state;
-	Transform* position;
+	Vector3* position;
 
 	// board will have a list of ALL BALLS ON THE BAORD apaprently and which ball is currently selected
 	Board* board;
@@ -29,10 +29,10 @@ public:
 	Ball();
 	~Ball();
 
-	Ball(Material* c, Dimple* startDimple, Board* b);
+	Ball(Color c, Dimple* startDimple, Board* b, Vector3* pos);
 	void updateBall();
 	bool moveBall(Direction d);
-
+	Vector3* getPosition();
 };
 
 #endif BALL_H

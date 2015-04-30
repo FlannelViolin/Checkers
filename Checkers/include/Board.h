@@ -1,5 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
+
 #include "BrickwareCore\Component.hpp"
 #include "BrickwareCore\Transform.hpp"
 #include "BrickwareUtils\JSONParser.hpp"
@@ -11,7 +12,6 @@ using namespace Brickware;
 using namespace Core;
 using namespace Math;
 using namespace Graphics;
-
 
 class Ball;
 class Dimple;
@@ -34,10 +34,10 @@ public:
 	void setSelected(Ball b);
 	void getSelected(Ball b);
 
-
+	std::list<Ball*> getBalls();
 	Dimple* getDimpleAtIndex(int index);
 
-	void populateBoard(char* jsonFile);
+	void populateBoard(char* jsonFile, int players);
 
 	void populateNeighbors();
 };

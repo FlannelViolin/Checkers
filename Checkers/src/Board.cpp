@@ -28,7 +28,7 @@ Dimple* Board::getDimpleAtIndex(int index){
 	return nullptr;
 }
 
-void Board::populateBoard(char* json){
+void Board::populateBoard(char* json, int players){
 	
 
 	Utility::JSONParser* parser = new Utility::JSONParser();
@@ -37,6 +37,7 @@ void Board::populateBoard(char* json){
 	
 	Utility::JSONObject* tempObject;
 	Dimple* tempDimple;
+	Ball* tempBall;
 	Transform* tempTransform;
 
 	//int index;
@@ -52,6 +53,8 @@ void Board::populateBoard(char* json){
 
 	
 	for (unsigned int i = 0; i < info->size(); i++){
+
+	
 		tempObject = info->at(i).object;
 
 		int index = tempObject->getValue<int>("Index");
@@ -70,6 +73,15 @@ void Board::populateBoard(char* json){
 		tempDimple = new Dimple(getColorFromString(start), pos, this, index);
 		tempDimple->setIndeces(neighbors);
 		
+		// DImple population up, Ball population down
+		if (end != nullptr){
+			tempBall = new Ball(CYAN, tempDimple, this, pos);
+		}
+		//GameObject* ballObject = new GameObject();
+		//ballObject->addComponent(ballRenderer);
+		//ballObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 0.0f));
+
+
 		
 	}
 
@@ -128,6 +140,10 @@ Color Board::getColorFromString(char* string){
 		return BLUE;
 	}
 	return GRAY;
+}
+
+std::list<Ball*> Board::getBalls(){
+	return balls;
 }
 
 /*"Index" : 0,
