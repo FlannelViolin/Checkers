@@ -96,6 +96,8 @@ public:
 			ballObject->addComponent(b);
 			ballObject->addComponent(ballRenderer);
 			ballObject->getTransform()->setPosition(*b->getPosition());
+			SphereCollider* collider = new SphereCollider(*b->getPosition(), .1f);
+			ballObject->addComponent(collider);
 		}
 
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
