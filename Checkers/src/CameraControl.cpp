@@ -15,45 +15,31 @@ void CameraControl::Update()
 	dt = GameTime::GetDeltaTime();
 
 	if (Input::getKeyDown(KeyCode::w))
-		moveUp();
+		pitch += radianIncrement * dt;
 
 	if (Input::getKeyDown(KeyCode::s))
-		moveDown();
-}
+		pitch -= radianIncrement * dt;
 
-void CameraControl::setLookAtTarget(Vector3 target)
-{
-	lookAtTarget = target;
-}
+	if (Input::getKeyDown(KeyCode::d))
+		yaw += radianIncrement * dt;
 
-void CameraControl::moveUp()
-{
-	Vector3 position = transform->getPosition();
-	position[1] += (speed * dt);
-	if (position[1] > 1)
-		position[1] = 1;
-	transform->setPosition(position);
+	if (Input::getKeyDown(KeyCode::a))
+		yaw -= radianIncrement * dt;
 
-	Vector3 lookAt;
+	Vector3 pos = transform->getPosition();
+	Vector3 rot = transform->getEulerRotation();
 
-	//lookAt[0] = lookAtTarget[0] - position[0];
-	//lookAt[1] = lookAtTarget[1] - position[1];
-	//lookAt[2] = lookAtTarget[2] - position[2];
+	float x = 3 * sinf(yaw) * cosf(pitch);
+	float y = 3 * sinf(pitch);
+	float z = 3 * cosf(yaw) * cosf(pitch);
 
-	getGameObject()->getComponent<Camera>()->setLookAt(lookAt);
-}
+	pos[0] = x;
+	pos[1] = y;
+	pos[2] = z;
 
-void CameraControl::moveDown()
-{
-	Vector3 position = transform->getPosition();
-	position[1] -= (speed * dt);
-	if (position[1] < -1)
-		position[1] = -1;
-	transform->setPosition(position);
+	rot[0] = -pitch;
+	rot[1] = yaw;
 
-	Vector3 lookAt;
-
-	lookAt = lookAtTarget - position;
-
-	getGameObject()->getComponent<Camera>()->setLookAt(lookAt);
+	transform->setPosition(pos);
+	transform->setEulerRotation(rot);
 }

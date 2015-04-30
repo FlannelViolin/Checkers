@@ -21,23 +21,13 @@ public:
 	virtual void Start() override;
 	virtual void Update() override;
 
-	void setLookAtTarget(Vector3 target);
-
 private:
-
-	void moveUp();
-	void moveDown();
-
 	Transform* transform;
 	float dt;
 	float speed;
 
-	Vector3 lookAtTarget;
+	float radianIncrement = 2;
 
-	/*
-	float XZAngle;
-
-	float xRatio;
-	float zRatio;
-	*/
+	float pitch = 0;
+	float yaw = 0;
 };
