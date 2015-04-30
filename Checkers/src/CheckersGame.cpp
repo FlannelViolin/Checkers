@@ -41,11 +41,10 @@ public:
 		camera->setActive();
 
 		CameraControl* cameraControl = new CameraControl();
-		cameraControl->setLookAtTarget(Vector3(0.0f, 0.0f, -3.0f));
 
 		GameObject* cameraObject = new GameObject();
 		cameraObject->addComponent(camera);
-		//cameraObject->addComponent(cameraControl);
+		cameraObject->addComponent(cameraControl);
 
 		Material* boardMat = new Material(ballShader);
 		boardMat->setTexture("diffuseTexture", d20Texture);
@@ -55,10 +54,10 @@ public:
 
 		GameObject* boardObject = new GameObject();
 		boardObject->addComponent(boardRenderer);
-		boardObject->addComponent(new BoardControl());
+		//boardObject->addComponent(new BoardControl());
 
-		cameraObject->getTransform()->setPosition(Vector3(0.0f, 0.0f,0.0f));
-		boardObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, -3.0f));
+		cameraObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 3.0f));
+		boardObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 0.0f));
 
 		
 		//+-=-=-=-=-=-=-=+ Lights! +-=-=-=-=-=-=-=-=+
