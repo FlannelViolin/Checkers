@@ -962,7 +962,7 @@
 			"StartTeam":"Blue",
 			"EndTeam":"Red",
 			"Coords":[
-				0.42,0.55,0.43
+				0.42,0.55,-0.43
 			],
 			"AdjacentIndicies": [
 				83,84,88,91,90,86
