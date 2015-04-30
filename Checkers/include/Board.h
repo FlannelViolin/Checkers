@@ -39,7 +39,7 @@ public:
 
 	void populateBoard(char* jsonFile);
 
-
+	void populateNeighbors();
 };
 
 #endif BOARD_H

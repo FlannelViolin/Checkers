@@ -14,8 +14,9 @@ Dimple::Dimple(Color c, Vector3* pos, Board* b, int i){
 	color = c;
 	position = pos;
 	board = b;
+	index = i;
 	board->addDimple(this);
-	i = index;
+
 }
 
 // get neighbor of a dimple at a certain direction
@@ -83,3 +84,10 @@ Direction Dimple::acrossFromDirection(Direction d){
 	return Direction(d + 3);
 }
 
+void Dimple::setIndeces(std::vector<Utility::JSONValue>* n){
+	neighborsIndeces = n;
+}
+
+std::vector<Utility::JSONValue>* Dimple::getIndeces(){
+	return neighborsIndeces;
+}

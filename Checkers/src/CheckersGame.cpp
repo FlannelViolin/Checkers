@@ -81,6 +81,7 @@ public:
 		
 		board = new Board();
 		board->populateBoard("Coords/Dimples.js");
+		board->populateNeighbors();
 		boardObject->addComponent(board);
 
 

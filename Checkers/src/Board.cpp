@@ -3,7 +3,7 @@
 
 Board::Board()
 {
-	
+	dimples.assign(200, nullptr);
 }
 
 
@@ -15,12 +15,14 @@ void Board::addBall(Ball* b){
 	balls.push_back(b);
 }
 void Board::addDimple(Dimple* d){
-	dimples[d->getIndex()] = d;
+	
+	dimples.at(d->getIndex()) = d;
+	
 }
 
 Dimple* Board::getDimpleAtIndex(int index){
 	// 200 being the amount of the dimples
-	if (index < 200){
+	if (index < (int)(dimples.size())){
 		return dimples[index];
 	}
 	return nullptr;
@@ -34,10 +36,10 @@ void Board::populateBoard(char* json){
 	std::vector<Utility::JSONValue>* info = boardInfo->getValue<std::vector<Utility::JSONValue>*>("Dimples");
 	
 	Utility::JSONObject* tempObject;
-	Dimple tempDimple;
+	Dimple* tempDimple;
 	Transform* tempTransform;
 
-	int index;
+	//int index;
 	char* start;
 	char* end;
 	std::vector<Utility::JSONValue>* positions;
@@ -52,53 +54,80 @@ void Board::populateBoard(char* json){
 	for (unsigned int i = 0; i < info->size(); i++){
 		tempObject = info->at(i).object;
 
-		index = tempObject->getValue<int>("Index");
+		int index = tempObject->getValue<int>("Index");
 
-		/*start = tempObject->getValue<char*>("StartTeam"); 
-		end = tempObject->getValue<char*>("EndTeam");*/
+		start = tempObject->getValue<char*>("StartTeam"); 
+		end = tempObject->getValue<char*>("EndTeam");
 
 		positions = tempObject->getValue<std::vector<Utility::JSONValue>*>("Coords");
 		pos = new Vector3(positions->at(0), positions->at(1), positions->at(2));
 		
 		neighbors = tempObject->getValue<std::vector<Utility::JSONValue>*>("AdjacentIndicies");
-		//tempDimple = new Dimple(getColorFromString(start)
-		//std::cout << index << ":" << start << std::endl;
+	
+		if (start == nullptr){
+			start = "None";
+		}
+		tempDimple = new Dimple(getColorFromString(start), pos, this, index);
+		tempDimple->setIndeces(neighbors);
+		
+		
 	}
 
 
 }
+Utility::JSONValue value;
+std::vector<Utility::JSONValue>* indeces;
+
+// populates neighbors
+void Board::populateNeighbors(){
+	// loop through neighbors
+	for (Dimple* d : dimples){
+		indeces = d->getIndeces();
+		//loop though indeces of neighbors
+		for ( int i = 0; i < indeces->size(); i++){
+			// get json value of indexes
+			value = indeces->at(i);
+			// is this value is a thing
+			if (value.boolean){
+				// get neighbor at index, and then cast direction 
+				d->addNeighboringDimple(getDimpleAtIndex(value.integer), (Direction)i);
+			}
+		}
+	}
+}
 
 Color Board::getColorFromString(char* string){
-	if (string == "Lime"){
+	if (strcmp(string,"Lime")==0){
 		return LIME;
 	}
-	else if (string == "Green"){
+	else if (strcmp(string,"Green") == 0){
 		return GREEN;
 	}
-	else if (string == "Black"){
+	else if (strcmp(string, "Black") == 0){
 		return BLACK;
 	}
-	else if (string == "White"){
+	else if (strcmp(string, "White") == 0){
 		return WHITE;
 	}
-	else if (string == "Violet"){
+	else if (strcmp(string, "Violet") == 0){
 		return VIOLET;
 	}
-	else if (string == "Purple"){
+	else if (strcmp(string, "Purple") == 0){
 		return PURPLE;
 	}
-	else if (string == "Yellow"){
+	else if (strcmp(string, "Yellow") == 0){
 		return YELLOW;
 	}
-	else if (string == "Cyan"){
+	else if (strcmp(string, "Cyan") == 0){
 		return CYAN;
 	}
-	else if (string == "Red"){
+	else if (strcmp(string, "Red") == 0){
 		return RED;
 	}
-	else if (string == "Blue"){
+	else if (strcmp(string, "Blue") == 0){
 		return BLUE;
 	}
+	return GRAY;
 }
 
 /*"Index" : 0,

@@ -28,7 +28,7 @@ enum Color{
 	CYAN,
 	RED,
 	BLUE,
-
+	GRAY
 };
 
 
