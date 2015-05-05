@@ -33,7 +33,7 @@ public:
 		if (!good)
 			return false;
 
-		Shader* ballShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
+		Shader* ballShader = new Shader("Shaders/GlowVertexShader", "Shaders/GlowPixelShader");
 		Texture* lavaTexture = new Texture("Textures/lavaTexture.bmp");
 		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
 		//board->addBall(new Ball()

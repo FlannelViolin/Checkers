@@ -61,5 +61,11 @@
     <FxCompile Include="..\Debug\Shaders\VertexShader.hlsl">
       <Filter>Resource Files</Filter>
     </FxCompile>
+    <FxCompile Include="..\Debug\Shaders\GlowPixelShader.hlsl">
+      <Filter>Resource Files</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Debug\Shaders\GlowVertexShader.hlsl">
+      <Filter>Resource Files</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
