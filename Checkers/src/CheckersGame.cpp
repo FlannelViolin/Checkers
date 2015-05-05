@@ -16,6 +16,7 @@ class CheckersGame : public Game
 {
 public:
 	Board* board;
+	int playerNum = 4; 
 
 	CheckersGame::CheckersGame() : Game(800, 600)
 	{	
@@ -86,7 +87,7 @@ public:
 		//ballObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 0.0f));
 		
 		board = new Board();
-		board->populateBoard("Coords/Dimples.js",2);
+		board->populateBoard("Coords/Dimples.js",playerNum);
 		board->populateNeighbors();
 		boardObject->addComponent(board);
 

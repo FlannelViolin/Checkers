@@ -70,12 +70,17 @@ void Board::populateBoard(char* json, int players){
 		if (start == nullptr){
 			start = "None";
 		}
-		tempDimple = new Dimple(getColorFromString(start), pos, this, index);
+
+		Color c = getColorFromString(start);
+
+		tempDimple = new Dimple(c, pos, this, index);
 		tempDimple->setIndeces(neighbors);
 		
 		// DImple population up, Ball population down
 		if (end != nullptr){
-			tempBall = new Ball(CYAN, tempDimple, this, pos);
+			if (int(c) < players){
+				tempBall = new Ball(c, tempDimple, this, pos);
+			}
 		}
 		//GameObject* ballObject = new GameObject();
 		//ballObject->addComponent(ballRenderer);
