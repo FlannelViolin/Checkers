@@ -34,6 +34,9 @@ public:
 			return false;
 
 		Shader* ballShader = new Shader("Shaders/GlowVertexShader", "Shaders/GlowPixelShader");
+		setCursorVisible(true);
+
+		Shader* ballShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
 		Texture* lavaTexture = new Texture("Textures/lavaTexture.bmp");
 		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
 		//board->addBall(new Ball()
