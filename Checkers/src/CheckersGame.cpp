@@ -17,7 +17,8 @@ class CheckersGame : public Game
 public:
 	Board* board;
 	int playerNum = 4; 
-
+	GameObject* CamLightObject;
+	GameObject* cameraObject;
 	CheckersGame::CheckersGame() : Game(800, 600)
 	{	
 		
@@ -39,6 +40,8 @@ public:
 		Shader* boardShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
 		Texture* lavaTexture = new Texture("Textures/lavaTexture.bmp");
 		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
+		Texture* UITexture = new Texture("Textures/UiUV.bmp");
+		Texture* DragonTexture = new Texture("Textures/DragonUV.bmp");
 		//board->addBall(new Ball()
 		Camera* camera = new Camera(90, 0.1f, 0.1f, 0.1f, 100.0f);
 		camera->setLookAt(Vector3(0.0f, 0.0f, -3.0f));
@@ -47,10 +50,20 @@ public:
 		CameraControl* cameraControl = new CameraControl();
 		//FirstPersonController* fpControl = new FirstPersonController();
 
-		GameObject* cameraObject = new GameObject();
+		cameraObject = new GameObject();
 		cameraObject->addComponent(camera);
 		//cameraObject->addComponent(fpControl);
 		cameraObject->addComponent(cameraControl);
+
+		Mesh* DragonMesh = new Mesh("Models/UIDragon.obj");
+		Material* dragonMat = new Material(boardShader);
+		dragonMat->setTexture("diffuseTexture", DragonTexture);
+		MeshRenderer* dragonRenderer = new MeshRenderer(DragonMesh, dragonMat);
+
+		Mesh* UIMesh = new Mesh("Models/UIConsole.obj");
+		Material* UIMat = new Material(boardShader);
+		UIMat->setTexture("diffuseTexture", UITexture);
+		MeshRenderer* UIRenderer = new MeshRenderer(UIMesh, UIMat);
 
 		Material* boardMat = new Material(boardShader);
 		boardMat->setTexture("diffuseTexture", d20Texture);
@@ -67,6 +80,13 @@ public:
 
 		
 		//+-=-=-=-=-=-=-=+ Lights! +-=-=-=-=-=-=-=-=+
+		GameObject* lightObject1 = new GameObject();
+		PointLight* light1 = new PointLight();
+		light1->setDiffuseColor(Vector3(.5f, .5f, .5f));
+		light1->setSpecularColor(Vector3(.3f, .3f, .3f));
+		lightObject1->getTransform()->setPosition(Vector3(0.0f, -20.0f, 0.0f));
+		lightObject1->addComponent(light1);
+
 		GameObject* lightObject2 = new GameObject();
 		PointLight* light2 = new PointLight();
 		light2->setDiffuseColor(Vector3(.8f, .8f, .8f));
@@ -74,12 +94,13 @@ public:
 		lightObject2->getTransform()->setPosition(Vector3(0.0f, 10.0f, 0.0f));
 		lightObject2->addComponent(light2);
 
-		GameObject* lightObject1 = new GameObject();
-		PointLight* light1 = new PointLight();
-		light1->setDiffuseColor(Vector3(.5f, .5f, .5f));
-		light1->setSpecularColor(Vector3(.3f, .3f, .3f));
-		lightObject1->getTransform()->setPosition(Vector3(0.0f, -20.0f, 0.0f));
-		lightObject1->addComponent(light1);
+
+		CamLightObject = new GameObject();
+		PointLight* light3 = new PointLight();
+		light3->setDiffuseColor(Vector3(.8f, .8f, .8f));
+		light3->setSpecularColor(Vector3(.3f, .3f, .3f));
+		CamLightObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 10.0f));
+		CamLightObject->addComponent(light3);
 
 
 		//+ game object testing //
@@ -122,6 +143,7 @@ public:
 
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
 			gameObjects[i]->Update();
+		CamLightObject->getTransform()->setPosition(cameraObject->getTransform()->getPosition());
 	}
 
 	void CheckersGame::renderScene()
