@@ -48,6 +48,9 @@ struct VertexToPixel
 	float3 worldNormal	: TEX_COORD1;
 	float3 worldPosition: TEX_COORD2;
 	float3 eyePosition	: TEX_COORD3;
+
+	float2 glowCoords[8]	: TEX_COORD4;
+	
 };
 
 // Entry point for this pixel shader
@@ -79,6 +82,16 @@ float4 main(VertexToPixel input) : SV_TARGET
 		float3 specular = light.specularColor * (specularPower * hue.rgb);
 		
 		finalColor += (ambient + diffuse + specular);	
+	}
+
+	// im using 8 cause im lazy
+	for (int i = 0; i < 8; i++){
+		// sample all neighbors
+		hue = diffuseTexture.Sample(MeshTextureSampler, input.glowCoords[i]);
+		if (finalColor[0] > .5){
+			finalColor[0] += .1;
+			finalColor[1] += .05;
+		}
 	}
 
 	return float4(finalColor, hue.a);

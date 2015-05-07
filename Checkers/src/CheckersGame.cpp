@@ -36,7 +36,7 @@ public:
 		Shader* ballShader = new Shader("Shaders/GlowVertexShader", "Shaders/GlowPixelShader");
 		setCursorVisible(true);
 
-		Shader* ballShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
+		Shader* boardShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
 		Texture* lavaTexture = new Texture("Textures/lavaTexture.bmp");
 		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
 		//board->addBall(new Ball()
@@ -45,12 +45,14 @@ public:
 		camera->setActive();
 
 		CameraControl* cameraControl = new CameraControl();
+		//FirstPersonController* fpControl = new FirstPersonController();
 
 		GameObject* cameraObject = new GameObject();
 		cameraObject->addComponent(camera);
+		//cameraObject->addComponent(fpControl);
 		cameraObject->addComponent(cameraControl);
 
-		Material* boardMat = new Material(ballShader);
+		Material* boardMat = new Material(boardShader);
 		boardMat->setTexture("diffuseTexture", d20Texture);
 
 		Mesh* boardMesh = new Mesh("Models/d20Dimpled.obj");
