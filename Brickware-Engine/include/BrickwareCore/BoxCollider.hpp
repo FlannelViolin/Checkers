@@ -2,15 +2,15 @@
 #define BOXCOLLIDER_H
 
 //DLL Headers
-#include "BrickwareCore\BrickwareCoreDLL.hpp"
+#include "BrickwareCore/BrickwareCoreDLL.hpp"
 
 //System Level Headers
 #include <iostream>
 #include <limits>
 
 //Project Headers
-#include "BrickwareCore\Collider.hpp"
-#include "BrickwareCore\Camera.hpp"
+#include "BrickwareCore/Collider.hpp"
+#include "BrickwareCore/Camera.hpp"
 
 namespace Brickware
 {
@@ -42,6 +42,9 @@ namespace Brickware
 			bool isCollidingWithFrustum(FrustumCollider* other);
 			bool isCollidingWithBounds(Math::Bounds other);
 			bool isCollidingWithRay(Math::Ray other, Math::Vector3* pointOfCollision);
+
+			//Box specific methods
+			bool isRayIntersectingSlab(Math::Vector3 projectionAxis, Math::Vector3 rayDirection, Math::Vector3 localizedCenter, float* min, float* max);
 		};
 	}
 }
