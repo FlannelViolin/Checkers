@@ -1,23 +1,8 @@
-﻿Build started 5/9/2015 11:40:32 PM.
+﻿Build started 5/10/2015 10:19:22 PM.
      1>Project "D:\Users\amt3824\Git\Checkers\Checkers\Checkers.vcxproj" on node 2 (Build target(s)).
-     1>FxCompile:
-         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\fxc.exe /nologo /E"main" /T ps_4_1 /Fo "D:\Users\amt3824\Git\Checkers\Debug\GlowPixelShader.cso" /Od /Zi ..\Debug\Shaders\GlowPixelShader.hlsl 
-     1>D:\Users\amt3824\Git\Checkers\Debug\Shaders\GlowPixelShader.hlsl(88,11): warning X3078: 'i': loop control variable conflicts with a previous declaration in the outer scope; most recent declaration will be used
-         
-         compilation object save succeeded; see D:\Users\amt3824\Git\Checkers\Debug\GlowPixelShader.cso
-         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\fxc.exe /nologo /E"main" /T vs_4_1 /Fo "D:\Users\amt3824\Git\Checkers\Debug\GlowVertexShader.cso" /Od /Zi ..\Debug\Shaders\GlowVertexShader.hlsl 
-         compilation object save succeeded; see D:\Users\amt3824\Git\Checkers\Debug\GlowVertexShader.cso
-       ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ID:\Users\amt3824\Git\Checkers\Checkers\include /I"D:\Users\amt3824\Git\Checkers\Brickware-Engine\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /D D3D_SUPPORT /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\Ball.cpp src\Board.cpp src\BoardControl.cpp src\CameraControl.cpp src\CheckersGame.cpp src\Dimple.cpp
-         Dimple.cpp
-         CheckersGame.cpp
-         CameraControl.cpp
-         BoardControl.cpp
-         Board.cpp
-     1>d:\users\amt3824\git\checkers\checkers\src\board.cpp(41): warning C4101: 'tempTransform' : unreferenced local variable
-     1>d:\users\amt3824\git\checkers\checkers\src\board.cpp(104): warning C4018: '<' : signed/unsigned mismatch
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ID:\Users\amt3824\Git\Checkers\Checkers\include /I"D:\Users\amt3824\Git\Checkers\Brickware-Engine\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /D D3D_SUPPORT /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\Ball.cpp
          Ball.cpp
-         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\amt3824\Git\Checkers\Debug\Checkers.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Users\amt3824\Git\Checkers\Brickware-Engine\lib" BrickwareGraphics.lib BrickwareUtils.lib BrickwareMath.lib BrickwareCore.lib dxguid.lib d3d11.lib d3dcompiler.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\amt3824\Git\Checkers\Debug\Checkers.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\amt3824\Git\Checkers\Debug\Checkers.lib" /MACHINE:X86 Debug\Ball.obj
          Debug\Board.obj
@@ -31,4 +16,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.70
+Time Elapsed 00:00:02.02

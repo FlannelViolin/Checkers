@@ -30,7 +30,11 @@ public:
 	~Ball();
 
 	Ball(Color c, Dimple* startDimple, Board* b, Vector3* pos);
-	void updateBall();
+	
+	virtual void Update();
+	virtual void OnMouseOver();
+	virtual void OnMouseExit();
+	
 	bool moveBall(Direction d);
 	Vector3* getPosition();
 };

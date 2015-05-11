@@ -25,18 +25,32 @@ Ball::~Ball()
 }
 
 // change material color based on selection state
-void Ball::updateBall(){
+void Ball::Update(){
 	switch (state){
 		case HIGHLIGHTED:
-		
+			std::cout << "Highlighted" << std::endl;
+			if (Input::getMouseButtonDown(MouseButton::leftButton))
+			{
+				std::cout << "Pressed" << std::endl;
+				state = SelectionState::SELECTED;
+			}
 		break;
 		case SELECTED:
-		
+			std::cout << "Selected" << std::endl;
 		break;
 		default:
-		
+			
 		break;
 	}
+}
+
+void Ball::OnMouseOver()
+{
+	state = SelectionState::HIGHLIGHTED;
+}
+void Ball::OnMouseExit()
+{
+	state = SelectionState::NONE;
 }
 
 bool Ball::moveBall(Direction d){
