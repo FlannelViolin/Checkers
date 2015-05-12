@@ -28,15 +28,15 @@ Ball::~Ball()
 void Ball::Update(){
 	switch (state){
 		case HIGHLIGHTED:
-			std::cout << "Highlighted" << std::endl;
+			//std::cout << "Highlighted" << std::endl;
 			if (Input::getMouseButtonDown(MouseButton::leftButton))
 			{
-				std::cout << "Pressed" << std::endl;
+				//std::cout << "Pressed" << std::endl;
 				state = SelectionState::SELECTED;
 			}
 		break;
 		case SELECTED:
-			std::cout << "Selected" << std::endl;
+			//std::cout << "Selected" << std::endl;
 		break;
 		default:
 			
