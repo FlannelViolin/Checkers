@@ -1,6 +1,4 @@
-
 #include "Ball.h"
-
 
 Ball::Ball()
 {
@@ -36,6 +34,8 @@ void Ball::Update(){
 			}
 		break;
 		case SELECTED:
+			if (Input::getKeyDown(KeyCode::s))
+				moveBall(Direction::DOWN_RIGHT);
 			//std::cout << "Selected" << std::endl;
 		break;
 		default:
@@ -81,10 +81,10 @@ bool Ball::moveBall(Direction d){
 	currentDimple = moveTo;
 	currentDimple->toggleOccupied();
 
-	//#TODO update transform;
-	//position = currentDimple->getPos();
-
-	
+	//update transform;
+	getGameObject()->getTransform()->setPosition(*currentDimple->getPos());
+	//Hack to make sure collider updates position
+	getGameObject()->getComponent<Collider>()->isColliding(getGameObject()->getComponent<Collider>(), NULL);
 
 	return true;
 }

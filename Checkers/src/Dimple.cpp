@@ -16,7 +16,7 @@ Dimple::Dimple(Color c, Vector3* pos, Board* b, int i){
 	board = b;
 	index = i;
 	board->addDimple(this);
-
+	occupied = false;
 }
 
 // get neighbor of a dimple at a certain direction
@@ -48,13 +48,9 @@ int Dimple::getIndex(){
 
 // TODO put in  a check to see if there is already a neighbor there
 void Dimple::addNeighboringDimple(Neighbor* n){
-	if (getNeighborAtDirection(n->direction) != nullptr){
+	//if (getNeighborAtDirection(n->direction) != nullptr){
 		neighbors.push_back(n);
-	}
-	else{
-		//exit method, there is no dimple there!
-		return;
-	}
+	//}
 	/* uncomment in times of great need, this adds itself to its own neighbors
 	
 	Dimple* neighborDimple = n->dimple;

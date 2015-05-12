@@ -2,6 +2,8 @@
 #define BALL_H
 #include "BrickwareCore\Component.hpp"
 #include "BrickwareCore\Transform.hpp"
+#include "BrickwareCore\GameObject.hpp"
+#include "BrickwareCore\Collider.hpp"
 
 #include "Dimple.h"
 #include "Util.h"

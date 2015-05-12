@@ -159,9 +159,6 @@ public:
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
 			gameObjects[i]->Start();
 
-
-
-
 		return true;
 	}
 
