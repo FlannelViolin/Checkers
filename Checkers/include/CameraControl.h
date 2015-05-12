@@ -16,7 +16,7 @@ using namespace Math;
 class CameraControl : public Component
 {
 public:
-	CameraControl();
+	CameraControl(bool p);
 
 	virtual void Start() override;
 	virtual void Update() override;
@@ -25,7 +25,7 @@ private:
 	Transform* transform;
 	float dt;
 	float speed;
-
+	bool paused;
 	float radianIncrement = 2;
 
 	float pitch = 0;

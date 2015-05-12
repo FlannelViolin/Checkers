@@ -78,10 +78,10 @@ void Board::populateBoard(char* json, int players){
 		
 		// DImple population up, Ball population down
 		if (strcmp(end, "None") != 0){
-			if (int(c) < players){
+			//if (int(c) < players){
 				tempDimple->toggleOccupied();
 				tempBall = new Ball(cs, tempDimple, this, pos);
-			}
+			//}
 		}
 		//GameObject* ballObject = new GameObject();
 		//ballObject->addComponent(ballRenderer);

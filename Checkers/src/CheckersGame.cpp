@@ -18,6 +18,7 @@ public:
 
 	Board* board;
 	int playerNum = 10; 
+	bool PausedState = false;
 	GameObject* CamLightObject;
 	GameObject* cameraObject;
 
@@ -70,7 +71,7 @@ public:
 		camera->setLookAt(Vector3(0.0f, 0.0f, -3.0f));
 		camera->setActive();
 
-		CameraControl* cameraControl = new CameraControl();
+		CameraControl* cameraControl = new CameraControl(PausedState);
 		//FirstPersonController* fpControl = new FirstPersonController();
 
 		cameraObject = new GameObject();
@@ -158,7 +159,6 @@ public:
 
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
 			gameObjects[i]->Start();
-
 		return true;
 	}
 
@@ -166,10 +166,9 @@ public:
 	{
 		if (Input::getKeyDown(KeyCode::escape))
 			running = false;
-
+		CamLightObject->getTransform()->setPosition(cameraObject->getTransform()->getPosition());
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
 			gameObjects[i]->Update();
-		CamLightObject->getTransform()->setPosition(cameraObject->getTransform()->getPosition());
 	}
 
 	void CheckersGame::renderScene()

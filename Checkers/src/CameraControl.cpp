@@ -1,8 +1,9 @@
 #include "CameraControl.h"
 
-CameraControl::CameraControl()
+CameraControl::CameraControl(bool P)
 {
 	speed = 1.0f;
+	paused = P;
 }
 
 void CameraControl::Start()
@@ -13,18 +14,28 @@ void CameraControl::Start()
 void CameraControl::Update()
 {
 	dt = GameTime::GetDeltaTime();
+	if (!paused){
+		if (Input::getKeyDown(KeyCode::w))
+			pitch += radianIncrement * dt;
 
-	if (Input::getKeyDown(KeyCode::w))
-		pitch += radianIncrement * dt;
+		if (Input::getKeyDown(KeyCode::s))
+			pitch -= radianIncrement * dt;
 
-	if (Input::getKeyDown(KeyCode::s))
-		pitch -= radianIncrement * dt;
+		if (Input::getKeyDown(KeyCode::d))
+			yaw += radianIncrement * dt;
 
-	if (Input::getKeyDown(KeyCode::d))
-		yaw += radianIncrement * dt;
+		if (Input::getKeyDown(KeyCode::a))
+			yaw -= radianIncrement * dt;
 
-	if (Input::getKeyDown(KeyCode::a))
+
+		if (Input::getKeyDown(KeyCode::p))
+			paused = true;
+	}
+	else {
 		yaw -= radianIncrement * dt;
+		if (Input::getKeyDown(KeyCode::p))
+			paused = false;
+	}
 
 	Vector3 pos = transform->getPosition();
 	Vector3 rot = transform->getEulerRotation();
@@ -42,4 +53,5 @@ void CameraControl::Update()
 
 	transform->setPosition(pos);
 	transform->setEulerRotation(rot);
+	
 }
