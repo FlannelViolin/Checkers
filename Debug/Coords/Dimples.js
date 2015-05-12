@@ -203,7 +203,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				-0.81,0,0.26
+				-0.81,0,-0.26
 			],
 			"AdjacentIndicies": [
 				15,16,21,23,19,17
@@ -225,7 +225,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				-0.61,0.23,0.61
+				-0.61,0.23,-0.61
 			],
 			"AdjacentIndicies": [
 				13,50,54,22,21,16
@@ -577,7 +577,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				-0.03,0.45,-0.77
+				0.03,0.45,-0.77
 			],
 			"AdjacentIndicies": [
 				48,49,53,56,55,51
@@ -720,7 +720,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				-0.61,-0.23,-0.61
+				0.61,-0.23,-0.61
 			],
 			"AdjacentIndicies": [
 				62,97,99,69,68,64
@@ -764,7 +764,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				-0.72,-0.45,-0.53
+				0.72,-0.45,-0.53
 			],
 			"AdjacentIndicies": [
 				65,99,106,110,73,68
@@ -1105,7 +1105,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				0.85,0.23,-0.13
+				0.85,0.23,0.13
 			],
 			"AdjacentIndicies": [
 				93,130,134,102,101,96
@@ -1160,7 +1160,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				0.77,-0.23,-0.39
+				0.77,-0.23,0.39
 			],
 			"AdjacentIndicies": [
 				102,137,139,109,108,104
@@ -1204,7 +1204,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				0.72,-0.45,-0.53
+				0.72,-0.45,0.53
 			],
 			"AdjacentIndicies": [
 				105,139,146,150,113,108
@@ -1875,7 +1875,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				-0.03,0.45,0.77
+				0.03,0.45,0.78
 			],
 			"AdjacentIndicies": [
 				166,167,171,174,140,133
@@ -1963,7 +1963,7 @@
 			"StartTeam":null,
 			"EndTeam":null,
 			"Coords":[
-				-0.5,0,-0.69
+				-0.5,0,0.69
 			],
 			"AdjacentIndicies": [
 				175,176,181,183,179,177
