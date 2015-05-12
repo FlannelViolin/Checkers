@@ -37,6 +37,8 @@ public:
 	
 	bool moveBall(Direction d);
 	Vector3* getPosition();
+
+	Color getColor();
 };
 
 #endif BALL_H

@@ -54,7 +54,7 @@ void Board::populateBoard(char* json, int players){
 	
 	for (unsigned int i = 0; i < info->size(); i++){
 
-	
+		std::cout << i << std::endl;
 		tempObject = info->at(i).object;
 
 		int index = tempObject->getValue<int>("Index");
@@ -66,20 +66,20 @@ void Board::populateBoard(char* json, int players){
 		pos = new Vector3(positions->at(0), positions->at(1), positions->at(2));
 		
 		neighbors = tempObject->getValue<std::vector<Utility::JSONValue>*>("AdjacentIndicies");
-	
-		if (start == nullptr){
-			start = "None";
-		}
+		
+		//if (end == nullptr){ end = "None"; }
+		if (start == nullptr){start = "None";}
 
-		Color c = getColorFromString(start);
+		Color cs = getColorFromString(start);
+		//Color ce = getColorFromString(end);
 
-		tempDimple = new Dimple(c, pos, this, index);
+		tempDimple = new Dimple(cs, pos, this, index);
 		tempDimple->setIndeces(neighbors);
 		
 		// DImple population up, Ball population down
 		if (end != nullptr){
 			if (int(c) < players){
-				tempBall = new Ball(c, tempDimple, this, pos);
+				tempBall = new Ball(cs, tempDimple, this, pos);
 			}
 		}
 		//GameObject* ballObject = new GameObject();

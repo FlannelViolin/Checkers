@@ -44,6 +44,10 @@ void Ball::Update(){
 	}
 }
 
+Color Ball::getColor(){
+	return color;
+}
+
 void Ball::OnMouseOver()
 {
 	state = SelectionState::HIGHLIGHTED;

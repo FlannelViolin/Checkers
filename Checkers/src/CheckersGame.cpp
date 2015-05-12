@@ -15,14 +15,16 @@ using namespace Utility;
 class CheckersGame : public Game
 {
 public:
+
 	Board* board;
-	int playerNum = 4; 
+	int playerNum = 10; 
 	GameObject* CamLightObject;
 	GameObject* cameraObject;
+
+
 	CheckersGame::CheckersGame() : Game(800, 600)
 	{	
 		
-
 
 
 	}
@@ -34,14 +36,35 @@ public:
 		if (!good)
 			return false;
 
-		Shader* ballShader = new Shader("Shaders/GlowVertexShader", "Shaders/GlowPixelShader");
-		setCursorVisible(true);
-
-		Shader* boardShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
 		Texture* lavaTexture = new Texture("Textures/lavaTexture.bmp");
 		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
 		Texture* UITexture = new Texture("Textures/UiUV.bmp");
 		Texture* DragonTexture = new Texture("Textures/DragonUV.bmp");
+		
+		//color textures
+		Texture* limeTexture = new Texture("Textures/lime.bmp");
+		Texture* greenTexture = new Texture("Textures/green.bmp");
+		Texture* blackTexture = new Texture("Textures/black.bmp");
+		Texture* whiteTexture = new Texture("Textures/white.bmp");
+		Texture* violetTexture = new Texture("Textures/violet.bmp");
+		Texture* purpleTexture = new Texture("Textures/purple.bmp");
+		Texture* yellowTexture = new Texture("Textures/yellow.bmp");
+		Texture* cyanTexture = new Texture("Textures/cyan.bmp");
+		Texture* redTexture = new Texture("Textures/red.bmp");
+		Texture* blueTexture = new Texture("Textures/blue.bmp");
+
+		Texture* texArray[10] = { limeTexture, greenTexture, lavaTexture, whiteTexture, 
+			violetTexture, purpleTexture, yellowTexture, cyanTexture, redTexture, blueTexture};
+		
+		Shader* lavaShader = new Shader("Shaders/GlowVertexShader", "Shaders/GlowPixelShader");
+
+		setCursorVisible(true);
+
+		Shader* boardShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
+
+		Shader* shaderArray[10] = { boardShader, boardShader, lavaShader, boardShader, boardShader, boardShader,
+			boardShader, boardShader, boardShader, boardShader };
+	
 		//board->addBall(new Ball()
 		Camera* camera = new Camera(90, 0.1f, 0.1f, 0.1f, 100.0f);
 		camera->setLookAt(Vector3(0.0f, 0.0f, -3.0f));
@@ -105,13 +128,15 @@ public:
 
 		//+ game object testing //
 
-		Mesh* ballMesh = new Mesh("Models/BallSmall.obj");
-		Material* ballMat = new Material(ballShader);
-		ballMat->setTexture("diffuseTexture", lavaTexture);
+		//Material* ballMat = new Material(ballShader);
+		//ballMat->setTexture("diffuseTexture", lavaTexture);
 		//GameObject* ballObject = new GameObject();
 		//ballObject->addComponent(ballRenderer);
 		//ballObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 0.0f));
 		
+
+		Mesh* ballMesh = new Mesh("Models/BallSmall.obj");
+
 		board = new Board();
 		board->populateBoard("Coords/Dimples.js",playerNum);
 		board->populateNeighbors();
@@ -119,7 +144,11 @@ public:
 
 		for (Ball* b : board->getBalls()){
 			GameObject* ballObject = new GameObject();
-			MeshRenderer* ballRenderer = new MeshRenderer(ballMesh, ballMat);
+			int index = int(b->getColor());
+
+			Material* tempMat = new Material(shaderArray[index]);
+			tempMat->setTexture("diffuseTexture", texArray[index]);
+			MeshRenderer* ballRenderer = new MeshRenderer(ballMesh, tempMat);
 			ballObject->addComponent(b);
 			ballObject->addComponent(ballRenderer);
 			ballObject->getTransform()->setPosition(*b->getPosition());
