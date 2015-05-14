@@ -1,5 +1,8 @@
 #include "Ball.h"
 
+//Statics
+Ball* Ball::SelectedBall = nullptr;
+
 Ball::Ball()
 {
 
@@ -16,6 +19,8 @@ Ball::Ball(Color c, Dimple* startDimple, Board* b, Vector3* pos){
 	// this shouuld be offset by the dimple object's normal
 //	position = currentDimple->getPos();
 	state = NONE;
+
+	createdClickables = false;
 }
 
 Ball::~Ball()
@@ -26,20 +31,62 @@ Ball::~Ball()
 void Ball::Update(){
 	switch (state){
 		case HIGHLIGHTED:
-			//std::cout << "Highlighted" << std::endl;
-			if (Input::getMouseButtonDown(MouseButton::leftButton))
+			std::cout << "Highlighted " << SelectedBall << std::endl;
+			if (Input::getMouseButtonDown(MouseButton::leftButton) && Ball::SelectedBall == nullptr)
 			{
-				//std::cout << "Pressed" << std::endl;
+				std::cout << "Pressed" << std::endl;
 				state = SelectionState::SELECTED;
+				Ball::SelectedBall = this;
 			}
 		break;
 		case SELECTED:
-			if (Input::getKeyDown(KeyCode::s))
-				moveBall(Direction::DOWN_RIGHT);
-			//std::cout << "Selected" << std::endl;
-		break;
-		default:
-			
+			//If the ball is selected, fill all of its empty neighbors with empty game objects with colliders and "clickable" components
+			//If the clickable gets clicked then we'll know which direction we want to move the ball in
+			std::cout << "Selected" << std::endl;
+
+			if (!createdClickables)
+			{
+				std::vector<Neighbor*> neighbors = this->currentDimple->getNeighbors();
+				for (unsigned int i = 0; i < neighbors.size(); i++)
+				{
+					Neighbor* neighbor = neighbors.at(i);
+					if (!neighbor->dimple->isOccupied())
+					{
+						GameObject* clickable = new GameObject();
+						SphereCollider* clickableCollider = new SphereCollider(*neighbor->dimple->getPos(), 0.11f);
+						clickable->addComponent(clickableCollider);
+						clickable->addComponent(new Clickable(neighbor));
+						clickable->addComponent(new MeshRenderer(new Mesh("Models/BallSmall.obj"), new Material(new Shader("Shaders/VertexShader", "Shaders/PixelShader"))));
+						clickable->getTransform()->setPosition(*neighbor->dimple->getPos());
+					}
+				}
+
+				createdClickables = true;
+			}
+
+			if (Input::getMouseButtonDown(MouseButton::rightButton))
+			{
+				Clickable::ClearClickables();
+				Clickable::Clicked = nullptr;
+
+				createdClickables = false;
+				state = SelectionState::NONE;
+				Ball::SelectedBall = nullptr;
+
+				state = SelectionState::NONE;
+				Ball::SelectedBall = nullptr;
+			}
+
+			if (Clickable::Clicked != nullptr)
+			{
+				moveBall(Clickable::Clicked->getParentNeighbor()->direction);
+
+				Clickable::ClearClickables();
+				Clickable::Clicked = nullptr;
+
+				createdClickables = false;
+				Ball::SelectedBall = nullptr;
+			}
 		break;
 	}
 }
@@ -50,11 +97,13 @@ Color Ball::getColor(){
 
 void Ball::OnMouseOver()
 {
-	state = SelectionState::HIGHLIGHTED;
+	if (Ball::SelectedBall != this)
+		state = SelectionState::HIGHLIGHTED;
 }
 void Ball::OnMouseExit()
 {
-	state = SelectionState::NONE;
+	if (Ball::SelectedBall != this)
+		state = SelectionState::NONE;
 }
 
 bool Ball::moveBall(Direction d){

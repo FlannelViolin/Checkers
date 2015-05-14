@@ -19,6 +19,9 @@ Dimple::Dimple(Color c, Vector3* pos, Board* b, int i){
 	occupied = false;
 }
 
+//Get all neighbors
+std::vector<Neighbor*> Dimple::getNeighbors(){ return neighbors; }
+
 // get neighbor of a dimple at a certain direction
 Dimple* Dimple::getNeighborAtDirection(Direction d){
 	Dimple* moveTo = nullptr;

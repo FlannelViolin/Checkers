@@ -7,7 +7,7 @@
 #include "Ball.h"
 #include "Util.h"
 #include "Board.h"
-#include <list>
+#include <vector>
 using namespace Brickware;
 using namespace Core;
 using namespace Math;
@@ -20,7 +20,7 @@ class Dimple : public Component
 private:
 	Board* board;
 	Color color;
-	std::list<Neighbor*> neighbors;
+	std::vector<Neighbor*> neighbors;
 	Vector3* position;
 	bool occupied;
 	int index;
@@ -38,6 +38,7 @@ public:
 	bool toggleOccupied();
 	bool isOccupied();
 
+	std::vector<Neighbor*> getNeighbors();
 	int getIndex();
 
 	Vector3* getPos();
@@ -52,7 +53,6 @@ public:
 struct Neighbor{
 	Dimple* dimple;
 	Direction direction;
-
 };
 
 

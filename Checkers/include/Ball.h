@@ -4,10 +4,13 @@
 #include "BrickwareCore\Transform.hpp"
 #include "BrickwareCore\GameObject.hpp"
 #include "BrickwareCore\Collider.hpp"
+#include "BrickwareCore\SphereCollider.hpp"
 
 #include "Dimple.h"
 #include "Util.h"
 #include "Board.h"
+#include "Clickable.h"
+
 using namespace Brickware;
 using namespace Core;
 using namespace Math;
@@ -19,6 +22,8 @@ class Ball : public Component
 {
 
 private:
+	static Ball* SelectedBall;
+
 	Color color;
 	Dimple* currentDimple;
 	SelectionState state;
@@ -26,6 +31,8 @@ private:
 
 	// board will have a list of ALL BALLS ON THE BAORD apaprently and which ball is currently selected
 	Board* board;
+
+	bool createdClickables;
 
 public:
 	Ball();

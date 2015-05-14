@@ -33,6 +33,9 @@
     <ClInclude Include="include\CameraControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Clickable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ball.cpp">
@@ -51,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\CameraControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Clickable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
