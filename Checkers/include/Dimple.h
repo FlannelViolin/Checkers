@@ -24,7 +24,7 @@ private:
 	Vector3* position;
 	bool occupied;
 	int index;
-	std::vector<Utility::JSONValue>* neighborsIndeces;
+	std::vector<Utility::JSONValue>* neighborsIndices;
 	Direction acrossFromDirection(Direction d);
 	//Color getColorFromString(char* string);
 
@@ -46,8 +46,8 @@ public:
 	void addNeighboringDimple(Neighbor* n);
 	void addNeighboringDimple(Dimple* d, Direction dir);
 
-	void setIndeces(std::vector<Utility::JSONValue>* n);
-	std::vector<Utility::JSONValue>* getIndeces();
+	void setIndices(std::vector<Utility::JSONValue>* n);
+	std::vector<Utility::JSONValue>* getIndices();
 }; 
 
 struct Neighbor{

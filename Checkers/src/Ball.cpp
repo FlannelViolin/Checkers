@@ -31,34 +31,33 @@ Ball::~Ball()
 void Ball::Update(){
 	switch (state){
 		case HIGHLIGHTED:
-			std::cout << "Highlighted " << SelectedBall << std::endl;
-			if (Input::getMouseButtonDown(MouseButton::leftButton) && Ball::SelectedBall == nullptr)
+			if (Input::getMouseButtonDown(MouseButton::leftButton) && Ball::SelectedBall == nullptr && !Clickable::GraceFrame)
 			{
-				std::cout << "Pressed" << std::endl;
 				state = SelectionState::SELECTED;
 				Ball::SelectedBall = this;
 			}
+
+			//After clicking on a "clickable" we don't want that mouse press to twice
+			if (Input::getMouseButtonUp(MouseButton::leftButton))
+				Clickable::GraceFrame = false;
 		break;
 		case SELECTED:
 			//If the ball is selected, fill all of its empty neighbors with empty game objects with colliders and "clickable" components
 			//If the clickable gets clicked then we'll know which direction we want to move the ball in
-			std::cout << "Selected" << std::endl;
-
 			if (!createdClickables)
 			{
 				std::vector<Neighbor*> neighbors = this->currentDimple->getNeighbors();
 				for (unsigned int i = 0; i < neighbors.size(); i++)
 				{
 					Neighbor* neighbor = neighbors.at(i);
-					if (!neighbor->dimple->isOccupied())
-					{
-						GameObject* clickable = new GameObject();
-						SphereCollider* clickableCollider = new SphereCollider(*neighbor->dimple->getPos(), 0.11f);
-						clickable->addComponent(clickableCollider);
-						clickable->addComponent(new Clickable(neighbor));
-						clickable->addComponent(new MeshRenderer(new Mesh("Models/BallSmall.obj"), new Material(new Shader("Shaders/VertexShader", "Shaders/PixelShader"))));
-						clickable->getTransform()->setPosition(*neighbor->dimple->getPos());
-					}
+					
+					GameObject* clickable = new GameObject();
+					SphereCollider* clickableCollider = new SphereCollider(Vector3(), 0.11f);
+					clickable->addComponent(clickableCollider);
+					clickable->addComponent(new Clickable(neighbor));
+					clickable->addComponent(new MeshRenderer(new Mesh("Models/BallSmall.obj"), new Material(new Shader("Shaders/VertexShader", "Shaders/PixelShader"))));
+					clickable->getTransform()->setPosition(*neighbor->dimple->getPos());
+					clickable->getTransform()->setScale(Vector3(1.1f, 1.1f, 1.1f));
 				}
 
 				createdClickables = true;
@@ -72,9 +71,6 @@ void Ball::Update(){
 				createdClickables = false;
 				state = SelectionState::NONE;
 				Ball::SelectedBall = nullptr;
-
-				state = SelectionState::NONE;
-				Ball::SelectedBall = nullptr;
 			}
 
 			if (Clickable::Clicked != nullptr)
@@ -85,7 +81,10 @@ void Ball::Update(){
 				Clickable::Clicked = nullptr;
 
 				createdClickables = false;
+				state = SelectionState::NONE;
 				Ball::SelectedBall = nullptr;
+
+				Clickable::GraceFrame = true;
 			}
 		break;
 	}
@@ -97,7 +96,7 @@ Color Ball::getColor(){
 
 void Ball::OnMouseOver()
 {
-	if (Ball::SelectedBall != this)
+	if (Ball::SelectedBall == nullptr)
 		state = SelectionState::HIGHLIGHTED;
 }
 void Ball::OnMouseExit()

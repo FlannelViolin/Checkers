@@ -15,6 +15,7 @@ class Clickable : public Component
 public:
 	static Clickable* Clicked;
 	static void ClearClickables();
+	static bool GraceFrame;
 
 	Clickable(Neighbor* parentNeighbor);
 
@@ -35,8 +36,6 @@ private:
 
 	Neighbor* parentNeighbor;
 	bool mouseOver;
-
-	bool toDelete;
 };
 
 #endif

@@ -4,13 +4,14 @@
 //Statics
 Clickable* Clickable::Clicked = nullptr;
 std::vector<Clickable*> Clickable::clickables;
+bool Clickable::GraceFrame = false;
 
 void Clickable::ClearClickables()
 {
 	//Delete all clickable game objects
 	for (unsigned int i = 0; i < clickables.size(); i++)
 	{
-		clickables.at(i)->toDelete = true;
+		GameObject::Destroy(clickables.at(i)->getGameObject());
 	}
 	
 	clickables.clear();
@@ -21,8 +22,9 @@ Clickable::Clickable(Neighbor* parentNeighbor)
 	this->parentNeighbor = parentNeighbor;
 	clickables.push_back(this);
 
+	Clickable::Clicked = nullptr;
+
 	mouseOver = false;
-	toDelete = false;
 }
 
 Neighbor* Clickable::getParentNeighbor(){ return this->parentNeighbor; }
@@ -31,20 +33,16 @@ void Clickable::Start(){}
 
 void Clickable::Update()
 {
-	if (toDelete)
-		return;
-
 	if (mouseOver)
 	{
-		if (Input::getMouseButtonDown(MouseButton::leftButton))
+		if (Input::getMouseButtonDown(MouseButton::leftButton) && !Clickable::GraceFrame)
 		{
 			Clicked = this;
+			Clickable::GraceFrame = true;
 		}
-	}
 
-	if (Input::getMouseButtonDown(MouseButton::rightButton))
-	{
-		std::cout << "Cancel" << std::endl;
+		if (Input::getMouseButtonUp(MouseButton::leftButton))
+			Clickable::GraceFrame = false;
 	}
 }
 
@@ -60,8 +58,7 @@ void Clickable::OnMouseStay()
 
 void Clickable::OnMouseExit()
 {
-	if (toDelete)
-		delete this->getGameObject();
+	mouseOver = false;
 }
 
 Clickable::~Clickable()

@@ -38,7 +38,6 @@ void Board::populateBoard(char* json, int players){
 	Utility::JSONObject* tempObject;
 	Dimple* tempDimple;
 	Ball* tempBall;
-	Transform* tempTransform;
 
 	//int index;
 	char* start;
@@ -74,7 +73,7 @@ void Board::populateBoard(char* json, int players){
 		//Color ce = getColorFromString(end);
 
 		tempDimple = new Dimple(cs, pos, this, index);
-		tempDimple->setIndeces(neighbors);
+		tempDimple->setIndices(neighbors);
 		
 		// DImple population up, Ball population down
 		if (strcmp(end, "None") != 0){
@@ -94,17 +93,17 @@ void Board::populateBoard(char* json, int players){
 
 }
 Utility::JSONValue value;
-std::vector<Utility::JSONValue>* indeces;
+std::vector<Utility::JSONValue>* indices;
 
 // populates neighbors
 void Board::populateNeighbors(){
 	// loop through neighbors
 	for (Dimple* d : dimples){
-		indeces = d->getIndeces();
-		//loop though indeces of neighbors
-		for ( int i = 0; i < indeces->size(); i++){
+		indices = d->getIndices();
+		//loop though indices of neighbors
+		for (unsigned int i = 0; i < indices->size(); i++){
 			// get json value of indexes
-			value = indeces->at(i);
+			value = indices->at(i);
 			// is this value is a thing
 			if (value.boolean){
 				// get neighbor at index, and then cast direction 

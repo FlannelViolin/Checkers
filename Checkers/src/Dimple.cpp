@@ -83,10 +83,10 @@ Direction Dimple::acrossFromDirection(Direction d){
 	return Direction(d + 3);
 }
 
-void Dimple::setIndeces(std::vector<Utility::JSONValue>* n){
-	neighborsIndeces = n;
+void Dimple::setIndices(std::vector<Utility::JSONValue>* n){
+	neighborsIndices = n;
 }
 
-std::vector<Utility::JSONValue>* Dimple::getIndeces(){
-	return neighborsIndeces;
+std::vector<Utility::JSONValue>* Dimple::getIndices(){
+	return neighborsIndices;
 }
