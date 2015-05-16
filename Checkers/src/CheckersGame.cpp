@@ -12,8 +12,14 @@ using namespace Graphics;
 using namespace Math;
 using namespace Utility;
 
+//Setup some stupid statics
+Mesh* Utils::ballMesh;
+Shader* Utils::highlightShader;
+Texture* Utils::whiteTexture;
+
 class CheckersGame : public Game
 {
+
 public:
 
 	Board* board;
@@ -35,7 +41,7 @@ public:
 		bool good = Game::init();
 
 		if (!good)
-			return false;
+			return false;		
 
 		Texture* lavaTexture = new Texture("Textures/lavaTexture.bmp");
 		Texture* d20Texture = new Texture("Textures/D20FullUnwrap.bmp");
@@ -46,7 +52,8 @@ public:
 		Texture* limeTexture = new Texture("Textures/lime.bmp");
 		Texture* greenTexture = new Texture("Textures/green.bmp");
 		Texture* blackTexture = new Texture("Textures/black.bmp");
-		Texture* whiteTexture = new Texture("Textures/white.bmp");
+		
+		Utils::whiteTexture = new Texture("Textures/white.bmp");
 		Texture* violetTexture = new Texture("Textures/violet.bmp");
 		Texture* purpleTexture = new Texture("Textures/purple.bmp");
 		Texture* yellowTexture = new Texture("Textures/yellow.bmp");
@@ -54,17 +61,17 @@ public:
 		Texture* redTexture = new Texture("Textures/red.bmp");
 		Texture* blueTexture = new Texture("Textures/blue.bmp");
 
-		Texture* texArray[10] = { limeTexture, greenTexture, lavaTexture, whiteTexture, 
+		Texture* texArray[10] = { limeTexture, greenTexture, lavaTexture, Utils::whiteTexture, 
 			violetTexture, purpleTexture, yellowTexture, cyanTexture, redTexture, blueTexture};
 		
 		Shader* lavaShader = new Shader("Shaders/GlowVertexShader", "Shaders/GlowPixelShader");
-
-		setCursorVisible(true);
-
+		Utils::highlightShader = new Shader("Shaders/VertexShader", "Shaders/PixelHighlight");
 		Shader* boardShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
 
-		Shader* shaderArray[10] = { boardShader, boardShader, lavaShader, boardShader, boardShader, boardShader,
-			boardShader, boardShader, boardShader, boardShader };
+		Shader* shaderArray[10] = { Utils::highlightShader, Utils::highlightShader, Utils::highlightShader, Utils::highlightShader, Utils::highlightShader, Utils::highlightShader,
+			Utils::highlightShader, Utils::highlightShader, Utils::highlightShader, Utils::highlightShader };
+
+		setCursorVisible(true);
 	
 		//board->addBall(new Ball()
 		Camera* camera = new Camera(90, 0.1f, 0.1f, 0.1f, 100.0f);
@@ -136,7 +143,7 @@ public:
 		//ballObject->getTransform()->setPosition(Vector3(0.0f, 0.0f, 0.0f));
 		
 
-		Mesh* ballMesh = new Mesh("Models/BallSmall.obj");
+		Utils::ballMesh = new Mesh("Models/BallSmall.obj");
 
 		board = new Board();
 		board->populateBoard("Coords/Dimples.js",playerNum);
@@ -149,7 +156,8 @@ public:
 
 			Material* tempMat = new Material(shaderArray[index]);
 			tempMat->setTexture("diffuseTexture", texArray[index]);
-			MeshRenderer* ballRenderer = new MeshRenderer(ballMesh, tempMat);
+			MeshRenderer* ballRenderer = new MeshRenderer(Utils::ballMesh, tempMat);
+			b->setStartTexture(texArray[index]);
 			ballObject->addComponent(b);
 			ballObject->addComponent(ballRenderer);
 			ballObject->getTransform()->setPosition(*b->getPosition());

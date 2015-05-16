@@ -34,6 +34,7 @@ public:
 private:
 	static std::vector<Clickable*> clickables;
 
+	Graphics::Material* material;
 	Neighbor* parentNeighbor;
 	bool mouseOver;
 };

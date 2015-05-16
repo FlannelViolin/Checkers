@@ -29,12 +29,17 @@ Clickable::Clickable(Neighbor* parentNeighbor)
 
 Neighbor* Clickable::getParentNeighbor(){ return this->parentNeighbor; }
 
-void Clickable::Start(){}
+void Clickable::Start()
+{
+	material = getGameObject()->getComponent<MeshRenderer>()->getMaterial();
+}
 
 void Clickable::Update()
 {
 	if (mouseOver)
 	{
+		material->setVector4("tintColor", Vector4(1.0f, 0.6f, 0.6f, 1.0f));
+
 		if (Input::getMouseButtonDown(MouseButton::leftButton) && !Clickable::GraceFrame)
 		{
 			Clicked = this;
@@ -43,6 +48,10 @@ void Clickable::Update()
 
 		if (Input::getMouseButtonUp(MouseButton::leftButton))
 			Clickable::GraceFrame = false;
+	}
+	else
+	{
+		material->setVector4("tintColor", Vector4(1, 1, 1, 1));
 	}
 }
 

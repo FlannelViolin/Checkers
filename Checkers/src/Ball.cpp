@@ -27,10 +27,18 @@ Ball::~Ball()
 {
 }
 
+void Ball::Start()
+{
+	material = getGameObject()->getComponent<MeshRenderer>()->getMaterial();
+}
+
 // change material color based on selection state
 void Ball::Update(){
 	switch (state){
 		case HIGHLIGHTED:
+			material->setTexture("diffuseTexture", Utils::whiteTexture);
+			material->setVector4("tintColor", Vector4(1.0f, 1.0f, 0.0f, 1.0f));
+
 			if (Input::getMouseButtonDown(MouseButton::leftButton) && Ball::SelectedBall == nullptr && !Clickable::GraceFrame)
 			{
 				state = SelectionState::SELECTED;
@@ -55,9 +63,15 @@ void Ball::Update(){
 					SphereCollider* clickableCollider = new SphereCollider(Vector3(), 0.11f);
 					clickable->addComponent(clickableCollider);
 					clickable->addComponent(new Clickable(neighbor));
-					clickable->addComponent(new MeshRenderer(new Mesh("Models/BallSmall.obj"), new Material(new Shader("Shaders/VertexShader", "Shaders/PixelShader"))));
+					
+					Material* clickableMaterial = new Material(Utils::highlightShader);
+					clickableMaterial->setTexture("diffuseTexture", Utils::whiteTexture);
+					clickable->addComponent(new MeshRenderer(Utils::ballMesh, clickableMaterial));
 					clickable->getTransform()->setPosition(*neighbor->dimple->getPos());
 					clickable->getTransform()->setScale(Vector3(1.1f, 1.1f, 1.1f));
+
+					//Gotta start the clickable
+					clickable->Start();
 				}
 
 				createdClickables = true;
@@ -86,6 +100,10 @@ void Ball::Update(){
 
 				Clickable::GraceFrame = true;
 			}
+		break;
+		default:
+			material->setTexture("diffuseTexture", startTexture);
+			material->setVector4("tintColor", Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		break;
 	}
 }
@@ -137,6 +155,12 @@ bool Ball::moveBall(Direction d){
 	return true;
 }
 
-Vector3* Ball::getPosition(){
+Vector3* Ball::getPosition()
+{
 	return position;
+}
+
+void Ball::setStartTexture(Texture* startTexture)
+{
+	this->startTexture = startTexture;
 }

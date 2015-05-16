@@ -25,6 +25,8 @@ private:
 	static Ball* SelectedBall;
 
 	Color color;
+	Material* material;
+	Texture* startTexture;
 	Dimple* currentDimple;
 	SelectionState state;
 	Vector3* position;
@@ -39,13 +41,15 @@ public:
 	~Ball();
 
 	Ball(Color c, Dimple* startDimple, Board* b, Vector3* pos);
-	
+
+	virtual void Start();
 	virtual void Update();
 	virtual void OnMouseOver();
 	virtual void OnMouseExit();
 	
 	bool moveBall(Direction d);
 	Vector3* getPosition();
+	void setStartTexture(Texture* startTexture);
 
 	Color getColor();
 };

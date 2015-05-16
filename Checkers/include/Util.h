@@ -31,5 +31,14 @@ enum Color{
 	GRAY
 };
 
+//Just going to store some static data here
+class Utils
+{
+public:
+	static Brickware::Graphics::Mesh* ballMesh;
+	static Brickware::Graphics::Shader* highlightShader;
+	static Brickware::Graphics::Texture* whiteTexture;
+};
+
 
 #endif UTIL_H
