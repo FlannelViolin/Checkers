@@ -58,20 +58,47 @@ void Ball::Update(){
 				for (unsigned int i = 0; i < neighbors.size(); i++)
 				{
 					Neighbor* neighbor = neighbors.at(i);
-					
-					GameObject* clickable = new GameObject();
-					SphereCollider* clickableCollider = new SphereCollider(Vector3(), 0.11f);
-					clickable->addComponent(clickableCollider);
-					clickable->addComponent(new Clickable(neighbor));
-					
-					Material* clickableMaterial = new Material(Utils::highlightShader);
-					clickableMaterial->setTexture("diffuseTexture", Utils::whiteTexture);
-					clickable->addComponent(new MeshRenderer(Utils::ballMesh, clickableMaterial));
-					clickable->getTransform()->setPosition(*neighbor->dimple->getPos());
-					clickable->getTransform()->setScale(Vector3(1.1f, 1.1f, 1.1f));
+					Dimple* nDimple = neighbor->dimple;
+					Vector3 actualNeighborPosition = *neighbor->dimple->getPos(); 
+					bool validNeighbor = true;
+					if (nDimple->isOccupied()){
+						// check jump dimple
+						Dimple* checkDimple = nDimple->getNeighborAtDirection(neighbor->direction);
+						// if there is a neighbor
+						if (checkDimple != nullptr){
+							// if its occupied
+							if (!checkDimple->isOccupied()){
+								actualNeighborPosition = *nDimple->getNeighborAtDirection(neighbor->direction)->getPos();
+							}
+							else{
+								validNeighbor = false;
+							}
+						}
+						else{
+							validNeighbor = false;
+						}
+						
+						
+						
+					}
 
-					//Gotta start the clickable
-					clickable->Start();
+					if (validNeighbor){
+						GameObject* clickable = new GameObject();
+						SphereCollider* clickableCollider = new SphereCollider(Vector3(), 0.11f);
+						clickable->addComponent(clickableCollider);
+						clickable->addComponent(new Clickable(neighbor));
+
+						Material* clickableMaterial = new Material(Utils::highlightShader);
+						clickableMaterial->setTexture("diffuseTexture", Utils::whiteTexture);
+						clickable->addComponent(new MeshRenderer(Utils::ballMesh, clickableMaterial));
+						clickable->getTransform()->setPosition(actualNeighborPosition);
+						clickable->getTransform()->setScale(Vector3(1.1f, 1.1f, 1.1f));
+
+						//Gotta start the clickable
+						clickable->Start();
+					}
+
+					
 				}
 
 				createdClickables = true;
@@ -85,6 +112,8 @@ void Ball::Update(){
 				createdClickables = false;
 				state = SelectionState::NONE;
 				Ball::SelectedBall = nullptr;
+				Clickable::GraceFrame = false;
+
 			}
 
 			if (Clickable::Clicked != nullptr)

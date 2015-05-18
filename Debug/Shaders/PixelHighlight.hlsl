@@ -26,7 +26,7 @@ cbuffer pixelData : register(b1)
 	Light lights[maxLights];
 	float3 ambientLight;
 
-	float4 tintColor = float4(1, 1, 1, 1);
+	float4 tintColor = float4(.25, 0, .5, 1);
 }
 
 //Vertex Data

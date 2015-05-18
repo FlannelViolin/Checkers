@@ -68,7 +68,7 @@ public:
 		Utils::highlightShader = new Shader("Shaders/VertexShader", "Shaders/PixelHighlight");
 		Shader* boardShader = new Shader("Shaders/VertexShader", "Shaders/PixelShader");
 
-		Shader* shaderArray[10] = { Utils::highlightShader, Utils::highlightShader, Utils::highlightShader, Utils::highlightShader, Utils::highlightShader, Utils::highlightShader,
+		Shader* shaderArray[10] = { Utils::highlightShader, Utils::highlightShader, lavaShader, Utils::highlightShader, Utils::highlightShader, Utils::highlightShader,
 			Utils::highlightShader, Utils::highlightShader, Utils::highlightShader, Utils::highlightShader };
 
 		setCursorVisible(true);
