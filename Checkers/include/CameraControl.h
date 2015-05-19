@@ -27,6 +27,7 @@ private:
 	float dt;
 	float speed;
 	bool paused;
+	bool grace; 
 	float radianIncrement = 2;
 
 	float pitch = 0;

@@ -103,7 +103,7 @@ void Board::populateNeighbors(){
 		for (unsigned int i = 0; i < indices->size(); i++){
 			// get json value of indexes
 			value = indices->at(i);
-			// is this value is a thing
+			// is this value a thing
 			if (value.boolean){
 				// get neighbor at index, and then cast direction 
 				d->addNeighboringDimple(getDimpleAtIndex(value.integer), (Direction)i);

@@ -40,7 +40,7 @@ void Ball::Update(){
 		case HIGHLIGHTED:
 			material->setTexture("diffuseTexture", Utils::highlightTexture);
 
-			tempColor = Vector4(tempColor[0] * .6, tempColor[1] * .6, tempColor[2] * .2, tempColor[3]);
+			tempColor = Vector4(tempColor[0] * .6, tempColor[1] * .6, tempColor[2] * .6, tempColor[3]);
 			material->setVector4("tintColor",tempColor);
 
 			if (Input::getMouseButtonDown(MouseButton::leftButton) && Ball::SelectedBall == nullptr && !Clickable::GraceFrame)
