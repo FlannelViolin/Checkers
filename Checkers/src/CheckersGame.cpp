@@ -16,6 +16,7 @@ using namespace Utility;
 Mesh* Utils::ballMesh;
 Shader* Utils::highlightShader;
 Texture* Utils::whiteTexture;
+Texture* Utils::highlightTexture;
 
 class CheckersGame : public Game
 {
@@ -53,6 +54,7 @@ public:
 		Texture* greenTexture = new Texture("Textures/green.bmp");
 		Texture* blackTexture = new Texture("Textures/black.bmp");
 		
+		Utils::highlightTexture = new Texture("Textures/BallHighlighttexture.bmp");
 		Utils::whiteTexture = new Texture("Textures/white.bmp");
 		Texture* violetTexture = new Texture("Textures/violet.bmp");
 		Texture* purpleTexture = new Texture("Textures/purple.bmp");
@@ -174,7 +176,7 @@ public:
 	{
 		if (Input::getKeyDown(KeyCode::escape))
 			running = false;
-		CamLightObject->getTransform()->setPosition(cameraObject->getTransform()->getPosition());
+		//CamLightObject->getTransform()->setPosition(cameraObject->getTransform()->getPosition());
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
 			gameObjects[i]->Update();
 	}

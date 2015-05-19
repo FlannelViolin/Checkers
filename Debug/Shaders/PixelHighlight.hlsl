@@ -61,8 +61,9 @@ float4 main(VertexToPixel input) : SV_TARGET
 		float3 lightDir = normalize(light.position - input.worldPosition);
 		float3 reflectDir = reflect(-lightDir, input.worldNormal);
 
-		float diffusePower = saturate(dot(input.worldNormal, lightDir)); //TODO replace gloss
+		float diffusePower = saturate(dot(input.worldNormal, lightDir)); 
 		float specularPower = pow(saturate(dot(viewDirection, reflectDir)), 128);
+
 
 		float3 ambient = light.ambientColor * hue.rgb;
 		float3 diffuse = light.diffuseColor* (diffusePower  * hue.rgb);

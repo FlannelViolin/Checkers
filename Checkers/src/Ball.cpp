@@ -34,10 +34,14 @@ void Ball::Start()
 
 // change material color based on selection state
 void Ball::Update(){
+	Vector4 tempColor = board->getVectorFromColor(color);
+
 	switch (state){
 		case HIGHLIGHTED:
-			material->setTexture("diffuseTexture", Utils::whiteTexture);
-			material->setVector4("tintColor", Vector4(1.0f, 1.0f, 0.0f, 1.0f));
+			material->setTexture("diffuseTexture", Utils::highlightTexture);
+
+			tempColor = Vector4(tempColor[0] * .6, tempColor[1] * .6, tempColor[2] * .2, tempColor[3]);
+			material->setVector4("tintColor",tempColor);
 
 			if (Input::getMouseButtonDown(MouseButton::leftButton) && Ball::SelectedBall == nullptr && !Clickable::GraceFrame)
 			{
@@ -89,7 +93,7 @@ void Ball::Update(){
 						clickable->addComponent(new Clickable(neighbor));
 
 						Material* clickableMaterial = new Material(Utils::highlightShader);
-						clickableMaterial->setTexture("diffuseTexture", Utils::whiteTexture);
+						clickableMaterial->setTexture("diffuseTexture", Utils::highlightTexture);
 						clickable->addComponent(new MeshRenderer(Utils::ballMesh, clickableMaterial));
 						clickable->getTransform()->setPosition(actualNeighborPosition);
 						clickable->getTransform()->setScale(Vector3(1.1f, 1.1f, 1.1f));
@@ -132,6 +136,7 @@ void Ball::Update(){
 		break;
 		default:
 			material->setTexture("diffuseTexture", startTexture);
+			
 			material->setVector4("tintColor", Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		break;
 	}

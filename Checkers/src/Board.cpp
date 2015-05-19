@@ -70,17 +70,17 @@ void Board::populateBoard(char* json, int players){
 		if (start == nullptr){start = "None";}
 
 		Color cs = getColorFromString(start);
-		//Color ce = getColorFromString(end);
+		Color ce = getColorFromString(end);
 
-		tempDimple = new Dimple(cs, pos, this, index);
+		tempDimple = new Dimple(ce, pos, this, index);
 		tempDimple->setIndices(neighbors);
 		
 		// DImple population up, Ball population down
 		if (strcmp(end, "None") != 0){
-			//if (int(c) < players){
+			if (int(cs) < players){
 				tempDimple->toggleOccupied();
 				tempBall = new Ball(cs, tempDimple, this, pos);
-			//}
+			}
 		}
 		//GameObject* ballObject = new GameObject();
 		//ballObject->addComponent(ballRenderer);
@@ -146,6 +146,48 @@ Color Board::getColorFromString(char* string){
 	}
 	return GRAY;
 }
+
+
+Vector4 Board::getVectorFromColor(Color c){
+	
+	switch(c){
+	case LIME:
+		return Vector4(0.0, 1.0, 0.0, 1.0);
+		break;
+	case GREEN:
+		return Vector4(0.0, .35f, .15f, 1.0);
+		break;
+	case BLACK:
+		return Vector4(0.0, 0.0, 0.0, 0.0);
+		break;
+	case WHITE:
+		return Vector4(1.0, 1.0f, 1.0f, 1.0);
+		break;
+	case VIOLET:
+		return Vector4(0.63, .52f, .75f, 1.0);
+		break;
+	case PURPLE:
+		return Vector4(0.20, .00f, .30f, 1.0);
+		break;
+	case YELLOW:
+		return Vector4(1.0, 1.00f, .00f, 1.0);
+		break;
+	case CYAN:
+		return Vector4(0.0, .68f, .93f, 1.0);
+		break;
+	case RED:
+		return Vector4(1.0, .00f, 0.0f, 1.0);
+		break;
+	case BLUE:
+		return Vector4(0.00, .00f, 1.0f, 1.0);
+		break;
+	default:
+		return Vector4(0.0, 0.0, 0.0, 0.0);
+
+	}
+
+}
+
 
 std::list<Ball*> Board::getBalls(){
 	return balls;

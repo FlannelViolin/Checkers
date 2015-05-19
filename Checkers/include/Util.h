@@ -38,6 +38,7 @@ public:
 	static Brickware::Graphics::Mesh* ballMesh;
 	static Brickware::Graphics::Shader* highlightShader;
 	static Brickware::Graphics::Texture* whiteTexture;
+	static Brickware::Graphics::Texture* highlightTexture;
 };
 
 

@@ -23,6 +23,7 @@ private:
 	std::vector<Dimple*> dimples;
 	Ball* selectedBall;
 	Color getColorFromString(char* string);
+	
 public:
 	Board();
 	~Board();
@@ -34,12 +35,16 @@ public:
 	void setSelected(Ball b);
 	void getSelected(Ball b);
 
+	Vector4 getVectorFromColor(Color c);
+
 	std::list<Ball*> getBalls();
 	Dimple* getDimpleAtIndex(int index);
 
 	void populateBoard(char* jsonFile, int players);
 
 	void populateNeighbors();
+
+	
 };
 
 #endif BOARD_H
