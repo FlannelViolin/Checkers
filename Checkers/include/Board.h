@@ -43,7 +43,6 @@ public:
 	void populateBoard(char* jsonFile, int players);
 
 	void populateNeighbors();
-
 	
 };
 

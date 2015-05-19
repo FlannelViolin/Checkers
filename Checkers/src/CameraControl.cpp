@@ -28,13 +28,16 @@ void CameraControl::Update()
 			yaw -= radianIncrement * dt;
 
 
-		if (Input::getKeyDown(KeyCode::p))
+		if (Input::getKeyDown(KeyCode::space))
 			paused = true;
+		UI->getTransform()->setScale(Vector3(0,0,0));
 	}
 	else {
-		yaw -= radianIncrement * dt;
-		if (Input::getKeyDown(KeyCode::p))
+		yaw -= radianIncrement/5 * dt;
+		pitch = 0;
+		if (Input::getKeyDown(KeyCode::space))
 			paused = false;
+		UI->getTransform()->setScale(Vector3(0.75, 0.75, 0.75));
 	}
 
 	Vector3 pos = transform->getPosition();
@@ -53,5 +56,6 @@ void CameraControl::Update()
 
 	transform->setPosition(pos);
 	transform->setEulerRotation(rot);
-	
+	UI->getTransform()->setEulerRotation(rot);
+
 }

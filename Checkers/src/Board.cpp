@@ -49,7 +49,7 @@ void Board::populateBoard(char* json, int players){
 	
 	Vector3* pos;
 
-
+	balls.clear();
 	
 	for (unsigned int i = 0; i < info->size(); i++){
 
@@ -71,7 +71,6 @@ void Board::populateBoard(char* json, int players){
 
 		Color cs = getColorFromString(start);
 		Color ce = getColorFromString(end);
-
 		tempDimple = new Dimple(ce, pos, this, index);
 		tempDimple->setIndices(neighbors);
 		
@@ -181,8 +180,11 @@ Vector4 Board::getVectorFromColor(Color c){
 	case BLUE:
 		return Vector4(0.00, .00f, 1.0f, 1.0);
 		break;
+	case GRAY:
+		return Vector4(0.5, 0.5f, 0.5f, 1.0);
+		break;
 	default:
-		return Vector4(0.0, 0.0, 0.0, 0.0);
+		return Vector4(0.5, 0.5, 0.5, 0.0);
 
 	}
 

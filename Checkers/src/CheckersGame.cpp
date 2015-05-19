@@ -25,7 +25,7 @@ public:
 
 	Board* board;
 	int playerNum = 10; 
-	bool PausedState = false;
+	bool PausedState = true;
 	GameObject* CamLightObject;
 	GameObject* cameraObject;
 
@@ -97,6 +97,9 @@ public:
 		Material* UIMat = new Material(boardShader);
 		UIMat->setTexture("diffuseTexture", UITexture);
 		MeshRenderer* UIRenderer = new MeshRenderer(UIMesh, UIMat);
+
+		cameraControl->UI->addComponent(dragonRenderer);
+		cameraControl->UI->addComponent(UIRenderer);
 
 		Material* boardMat = new Material(boardShader);
 		boardMat->setTexture("diffuseTexture", d20Texture);
@@ -176,6 +179,7 @@ public:
 	{
 		if (Input::getKeyDown(KeyCode::escape))
 			running = false;
+
 		//CamLightObject->getTransform()->setPosition(cameraObject->getTransform()->getPosition());
 		for (unsigned int i = 0; i < gameObjects.size(); i++)
 			gameObjects[i]->Update();

@@ -18,6 +18,7 @@ class CameraControl : public Component
 public:
 	CameraControl(bool p);
 
+	GameObject* UI = new GameObject();
 	virtual void Start() override;
 	virtual void Update() override;
 
